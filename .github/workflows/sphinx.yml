@@ -13,8 +13,8 @@ jobs:
     - name: Credentials
       run: |
         git init
-        git config --global user.email "$(git show --format=%ae -s)"
-        git config --global user.name "$(git show --format=%an -s)"
+        git config --global user.email "emanuele.guidotti@unine.ch"
+        git config --global user.name "Emanuele Guidotti"
     - uses: actions/checkout@v1
     - name: Set up Python 3.7
       uses: actions/setup-python@v1
