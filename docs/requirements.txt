@@ -1,4 +1,4 @@
-sphinx
+sphinx==3.4.3
 sphinx-press-theme
 sphinx-autodoc-typehints
 sphinx-sitemap
