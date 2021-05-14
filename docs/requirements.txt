@@ -1,0 +1,6 @@
+sphinx
+sphinx-press-theme
+sphinx-autodoc-typehints
+sphinx-sitemap
+sphinxcontrib-googleanalytics
+sphinxext-opengraph
