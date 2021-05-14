@@ -59,7 +59,7 @@ Discover the flexibility of the library in the `documentation <docs.html>`_.
 Tutorials
 ====================================================
 
-Get started with more advanced `tutorials <tutorials.html>`_.
+Get started with more advanced `tutorials <https://github.com/SparseTensorClassifier/tutorial>`_.
 
 ====================================================
 Bug Reports
