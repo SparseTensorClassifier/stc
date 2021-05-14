@@ -41,7 +41,7 @@ The purpose for this dataset is to be able to predict the classification of the 
 	from stc import SparseTensorClassifier
 	
 	# Read the dataset
-	zoo = pd.read_csv('https://raw.githubusercontent.com/SparseTensorClassifier/tutorial/main/data/zoo/zoo.csv')
+	zoo = pd.read_csv('https://git.io/Jss6f')
 	# Initialize the class
 	STC = SparseTensorClassifier(targets=['class_type'], features=zoo.columns[1:-1])
 	# Fit the training data
