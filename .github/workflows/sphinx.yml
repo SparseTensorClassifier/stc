@@ -6,32 +6,10 @@ on:
     - main
 
 jobs:
-  release:
-    name: Build Sphinx
+  docs:
     runs-on: ubuntu-latest
     steps:
-    - name: Credentials
-      run: |
-        git init
-        git config --global user.email "emanuele.guidotti@unine.ch"
-        git config --global user.name "Emanuele Guidotti"
     - uses: actions/checkout@v1
-    - name: Set up Python 3.7
-      uses: actions/setup-python@v1
+    - uses: ammaraskar/sphinx-action@master
       with:
-        python-version: 3.7
-    - name: Install dependencies
-      run: |
-        cd docs
-        sudo apt install pandoc
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-    - name: Build sphinx documentation
-      run: |
-        cd docs
-        make html
-    - name: Commit changes
-      run: |
-        git add .
-        git commit
-        git push origin gh-pages
+        docs-folder: "docs/"
