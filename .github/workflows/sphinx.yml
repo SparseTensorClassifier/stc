@@ -10,20 +10,16 @@ jobs:
     runs-on: ubuntu-latest
     steps: 
     - uses: actions/checkout@v1
-    - name: Install dependencies
+    - uses: ammaraskar/sphinx-action@master
+      with:
+        docs-folder: "docs/"
+    - name: Install pkg dependencies
       run: |
-        cd docs
-        sudo apt install pandoc
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-    - name: Build sphinx documentation
-      run: |
-        cd docs
-        make html
     - name: Commit documentation changes
       run: |
-        git fetch origin +refs/heads/gh-pages:refs/remotes/origin/gh-pages
-        git checkout -B gh-pages refs/remotes/origin/gh-pages
+        git clone https://github.com/ammaraskar/sphinx-action-test.git --branch gh-pages --single-branch gh-pages
         rm -r gh-pages/*
         cp -r docs/build/html/* gh-pages/
         cd gh-pages
@@ -31,5 +27,9 @@ jobs:
         git config --local user.name "GitHub Action"
         git add .
         git commit -m "Update documentation" -a || true
-        git push origin gh-pages
-    
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        branch: gh-pages
+        directory: gh-pages
+        github_token: ${{ secrets.GITHUB_TOKEN }}
