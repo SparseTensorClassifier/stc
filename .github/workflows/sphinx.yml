@@ -15,6 +15,8 @@ jobs:
         docs-folder: "docs/"
     - name: Commit documentation changes
       run: |
+        git init
+        mkdir gh-pages
         cp -r docs/build/html/* gh-pages/
         cd gh-pages
         git config --local user.email "action@github.com"
