@@ -7,7 +7,7 @@ on:
 
 jobs:
   release:
-    name: Build
+    name: Build Sphinx
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
@@ -22,4 +22,5 @@ jobs:
         pip install -r requirements.txt
     - name: Build sphinx documentation
       run: |
+        cd docs
         make html
