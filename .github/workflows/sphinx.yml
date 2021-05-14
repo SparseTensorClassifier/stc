@@ -10,18 +10,19 @@ jobs:
     runs-on: ubuntu-latest
     steps: 
     - uses: actions/checkout@v1
-    - name: Install pkg dependencies
+    - name: Build sphinx documentation
       run: |
+        sudo apt install pandoc
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-    - uses: ammaraskar/sphinx-action@master
-      with:
-        docs-folder: "docs/"
+        cd docs
+        pip install -r requirements.txt
+        make html
     - name: Commit documentation changes
       run: |
         git clone https://github.com/ammaraskar/sphinx-action-test.git --branch gh-pages --single-branch gh-pages
         rm -r gh-pages/*
-        cp -r docs/build/html/* gh-pages/
+        cp -r build/html/* gh-pages/
         cd gh-pages
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
