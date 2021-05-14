@@ -1,110 +1,243 @@
-
 <!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html >
   <head>
-    <meta charset="utf-8" />
-    <title>Welcome to No Errors Test Project’s documentation! &#8212; No Errors Test Project  documentation</title>
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
-    <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-   
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<script type="text/javascript">
 
-  </head><body>
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-000']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  <meta property="og:title" content="Sparse Tensor Classifier" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://sparsetensorclassifier.org/index.html" />
+  <meta property="og:description" content="Sparse Tensor Classifier (STC) is a supervised classification algorithm for categorical data inspired by the notion of superposition of states in quantum physics. It supports multiclass and multila..." />
+  <meta property="og:image" content="https://sparsetensorclassifier.org/_static/img/logo.png" />
+  <meta property="og:image:alt" content="Sparse Tensor Classifier" />
+  
+      <title>Sparse Tensor Classifier</title>
+    
+      <link rel="stylesheet" href="_static/pygments.css">
+      <link rel="stylesheet" href="_static/theme.css">
+      <link rel="stylesheet" href="_static/sphinx_press_theme.css">
+          <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+      
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+
+      <!-- sphinx script_files -->
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+
+      
+      <script src="_static/theme-vendors.js"></script>
+      <script src="_static/theme.js" defer></script>
+      <link rel="canonical" href="https://sparsetensorclassifier.org/index.html" />
+    
+      <link rel="shortcut icon" href="_static/favicon.png"/>
+  <link rel="index" title="Index" href="genindex.html" />
+  <link rel="search" title="Search" href="search.html" />
+  <link rel="next" title="Documentation" href="docs.html" /> 
+  </head>
+
+  <body>
+    <div id="app" class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
+  <router-link to="#" class="home-link">
+    
+      <img class="logo" src="_static/logo.png" alt="doit logo"/>
+    
+  </router-link>
+
+  <div class="links">
+    <navlinks class="can-hide">
+
+
+
+  
+    <div class="nav-item">
+      <a href="https://github.com/SparseTensorClassifier"
+        class="nav-link external">
+          Github <outboundlink/>
+      </a>
+    </div>
   
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
+    </navlinks>
+  </div>
+</navbar>
+
+      
+      <div class="sidebar-mask" @click="toggleSidebar(false)">
+      </div>
+        <sidebar @toggle-sidebar="toggleSidebar">
           
-
-          <div class="body" role="main">
+          <navlinks>
             
-  <div class="section" id="welcome-to-no-errors-test-project-s-documentation">
-<h1>Welcome to No Errors Test Project’s documentation!<a class="headerlink" href="#welcome-to-no-errors-test-project-s-documentation" title="Permalink to this headline">¶</a></h1>
+
+
+
+  
+    <div class="nav-item">
+      <a href="https://github.com/SparseTensorClassifier"
+        class="nav-link external">
+          Github <outboundlink/>
+      </a>
+    </div>
+  
+
+            
+          </navlinks><div id="searchbox" class="searchbox" role="search">
+  <div class="caption"><span class="caption-text">Quick search</span>
+    <div class="searchformwrapper">
+      <form class="search" action="search.html" method="get">
+        <input type="text" name="q" />
+        <input type="submit" value="Search" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div><div class="sidebar-links" role="navigation" aria-label="main navigation">
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="#sparse-tensor-classifier">Sparse Tensor Classifier</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="docs.html" class="reference internal ">Documentation</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="tutorials.html" class="reference internal ">Tutorials</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="references.html" class="reference internal ">References</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="contacts.html" class="reference internal ">Contacts</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+</div>
+        </sidebar>
+
+      <page>
+          <div class="body-header" role="navigation" aria-label="navigation">
+  
+  <ul class="breadcrumbs">
+    <li><a href="#">Docs</a> &raquo;</li>
+    
+    <li>Sparse Tensor Classifier</li>
+  </ul>
+  
+
+  <ul class="page-nav">
+  <li class="next">
+    <a href="docs.html"
+       title="next chapter">Documentation →</a>
+  </li>
+</ul>
+  
+</div>
+<hr>
+          <div class="content" role="main">
+            
+  <section id="sparse-tensor-classifier">
+<h1>Sparse Tensor Classifier<a class="headerlink" href="#sparse-tensor-classifier" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
+<p>Sparse Tensor Classifier (STC) is a supervised classification algorithm for categorical data inspired by the notion of superposition of states in quantum physics. It supports multiclass and multilabel classification, online learning, prior knowledge, automatic dataset balancing, missing data, and provides a native explanation of its predictions both for single instances and for each target class label globally. The algorithm is implemented in SQL and made available via the Python module <code class="docutils literal notranslate"><span class="pre">stc</span></code> on <a class="reference external" href="https://pypi.org/project/stc/">PyPI</a>. By default, the library uses an in-memory SQLite database, shipped with Python standard library, that require no configuration by the user. However, it is possible to configure STC to run on alternative DBMS in order to take advantage of persistent storage and scalability.</p>
+<p><a class="reference external" href="https://github.com/SparseTensorClassifier/stc">&gt; Don’t forget to star the repository!</a></p>
+<section id="quickstart">
+<h2>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this headline">¶</a></h2>
+<p>Install <code class="docutils literal notranslate"><span class="pre">stc</span></code> from <a class="reference external" href="https://pypi.org/project/stc/">PyPI</a> and make sure to be running <code class="docutils literal notranslate"><span class="pre">Python</span> <span class="pre">&gt;=3.7</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">stc</span>
+</pre></div>
 </div>
-<div class="section" id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
-<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
-<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
-</ul>
+</section>
+<section id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>Use the Sparse Tensor Classifier to classify animals.
+The <a class="reference external" href="https://www.kaggle.com/uciml/zoo-animal-classification">dataset</a> consists of 101 animals from a zoo.
+There are 16 variables with various traits to describe the animals.
+The 7 Class Types are: Mammal, Bird, Reptile, Fish, Amphibian, Bug and Invertebrate
+The purpose for this dataset is to be able to predict the classification of the animals.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">stc</span> <span class="kn">import</span> <span class="n">SparseTensorClassifier</span>
+
+<span class="c1"># Read the dataset</span>
+<span class="n">zoo</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/SparseTensorClassifier/tutorial/main/data/zoo/zoo.csv&#39;</span><span class="p">)</span>
+<span class="c1"># Initialize the class</span>
+<span class="n">STC</span> <span class="o">=</span> <span class="n">SparseTensorClassifier</span><span class="p">(</span><span class="n">targets</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;class_type&#39;</span><span class="p">],</span> <span class="n">features</span><span class="o">=</span><span class="n">zoo</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="c1"># Fit the training data</span>
+<span class="n">STC</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">zoo</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">70</span><span class="p">])</span>
+<span class="c1"># Predict the test data</span>
+<span class="n">labels</span><span class="p">,</span> <span class="n">probability</span><span class="p">,</span> <span class="n">explainability</span> <span class="o">=</span> <span class="n">STC</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">zoo</span><span class="p">[</span><span class="mi">70</span><span class="p">:])</span>
+</pre></div>
 </div>
+</section>
+<section id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
+<p>Discover the flexibility of the library in the <a class="reference external" href="docs.html">documentation</a>.</p>
+</section>
+<section id="tutorials">
+<h2>Tutorials<a class="headerlink" href="#tutorials" title="Permalink to this headline">¶</a></h2>
+<p>Get started with more advanced <a class="reference external" href="tutorials.html">tutorials</a>.</p>
+</section>
+<section id="bug-reports">
+<h2>Bug Reports<a class="headerlink" href="#bug-reports" title="Permalink to this headline">¶</a></h2>
+<p>Open an issue on <a class="reference external" href="https://github.com/SparseTensorClassifier/stc/issues">GitHub</a>.</p>
+</section>
+<section id="cite-as">
+<h2>Cite as<a class="headerlink" href="#cite-as" title="Permalink to this headline">¶</a></h2>
+<p>Guidotti E., Ferrara A., (2021). “<em>An Explainable Probabilistic Classifier for Categorical Data Inspired to Quantum Physics</em>”</p>
+<p><a class="reference external" href="references.html">See references</a></p>
+</section>
+<section id="license">
+<h2>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h2>
+<p>All code is released under the <a class="reference external" href="https://github.com/SparseTensorClassifier/stc/blob/main/LICENSE">GNU GPL-3</a>. If you need to use the same code under different terms, for instance allowing its inclusion in proprietary applications, <a class="reference external" href="contacts.html">contact us</a> to obtain an <a class="reference external" href="https://www.gnu.org/philosophy/selling-exceptions.html">exception</a>.</p>
+</section>
+</section>
 
 
           </div>
-          
-        </div>
-      </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="#">No Errors Test Project</a></h1>
-
-
-
-
-
-
-
-
-<h3>Navigation</h3>
-
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="#">Documentation overview</a><ul>
-  </ul></li>
-</ul>
+          <div class="page-nav">
+            <div class="inner"><ul class="page-nav">
+  <li class="next">
+    <a href="docs.html"
+       title="next chapter">Documentation →</a>
+  </li>
+</ul><div class="footer" role="contentinfo">
+      &#169; Copyright 2020, E Guidotti, A Ferrara.
+    <br>
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.3 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a>.
 </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
-      <input type="submit" value="Go" />
-    </form>
+            </div>
+          </div>
+      </page>
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
-
-
-
-
-
-
-
-
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="footer">
-      &copy;2019, sphinx-action Test Suite.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.4</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
-      
-      |
-      <a href="_sources/index.rst.txt"
-          rel="nofollow">Page source</a>
-    </div>
-
     
-
     
   </body>
 </html>

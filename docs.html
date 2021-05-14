@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-000']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  <meta property="og:title" content="Docs | Sparse Tensor Classifier" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://sparsetensorclassifier.org/docs.html" />
+  <meta property="og:description" content="Documentation:" />
+  <meta property="og:image" content="https://sparsetensorclassifier.org/_static/img/logo.png" />
+  <meta property="og:image:alt" content="Docs | Sparse Tensor Classifier" />
+  
+      <title>Docs | Sparse Tensor Classifier</title>
+    
+      <link rel="stylesheet" href="_static/pygments.css">
+      <link rel="stylesheet" href="_static/theme.css">
+      <link rel="stylesheet" href="_static/sphinx_press_theme.css">
+          <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+      
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+
+      <!-- sphinx script_files -->
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+
+      
+      <script src="_static/theme-vendors.js"></script>
+      <script src="_static/theme.js" defer></script>
+      <link rel="canonical" href="https://sparsetensorclassifier.org/docs.html" />
+    
+      <link rel="shortcut icon" href="_static/favicon.png"/>
+  <link rel="index" title="Index" href="genindex.html" />
+  <link rel="search" title="Search" href="search.html" />
+  <link rel="next" title="Tutorials" href="tutorials.html" />
+  <link rel="prev" title="Sparse Tensor Classifier" href="index.html" /> 
+  </head>
+
+  <body>
+    <div id="app" class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
+  <router-link to="index.html" class="home-link">
+    
+      <img class="logo" src="_static/logo.png" alt="doit logo"/>
+    
+  </router-link>
+
+  <div class="links">
+    <navlinks class="can-hide">
+
+
+
+  
+    <div class="nav-item">
+      <a href="https://github.com/SparseTensorClassifier"
+        class="nav-link external">
+          Github <outboundlink/>
+      </a>
+    </div>
+  
+
+    </navlinks>
+  </div>
+</navbar>
+
+      
+      <div class="sidebar-mask" @click="toggleSidebar(false)">
+      </div>
+        <sidebar @toggle-sidebar="toggleSidebar">
+          
+          <navlinks>
+            
+
+
+
+  
+    <div class="nav-item">
+      <a href="https://github.com/SparseTensorClassifier"
+        class="nav-link external">
+          Github <outboundlink/>
+      </a>
+    </div>
+  
+
+            
+          </navlinks><div id="searchbox" class="searchbox" role="search">
+  <div class="caption"><span class="caption-text">Quick search</span>
+    <div class="searchformwrapper">
+      <form class="search" action="search.html" method="get">
+        <input type="text" name="q" />
+        <input type="submit" value="Search" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div><div class="sidebar-links" role="navigation" aria-label="main navigation">
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="index.html#sparse-tensor-classifier">Sparse Tensor Classifier</a></span>
+      </p>
+      <ul class="current">
+        
+          <li class="toctree-l1 current"><a href="#" class="reference internal current">Documentation</a>
+
+            
+              <ul>
+                
+                  <li class="toctree-l2"><a href="#documentation" class="reference internal">Documentation</a></li>
+                
+              </ul>
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="tutorials.html" class="reference internal ">Tutorials</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="references.html" class="reference internal ">References</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="contacts.html" class="reference internal ">Contacts</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+</div>
+        </sidebar>
+
+      <page>
+          <div class="body-header" role="navigation" aria-label="navigation">
+  
+  <ul class="breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+    
+    <li>Docs | Sparse Tensor Classifier</li>
+  </ul>
+  
+
+  <ul class="page-nav">
+  <li class="prev">
+    <a href="index.html"
+       title="previous chapter">← Sparse Tensor Classifier</a>
+  </li>
+  <li class="next">
+    <a href="tutorials.html"
+       title="next chapter">Tutorials →</a>
+  </li>
+</ul>
+  
+</div>
+<hr>
+          <div class="content" role="main">
+            
+  <section id="documentation">
+<h1>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="stc.SparseTensorClassifier">
+<em class="property">class </em><code class="sig-prename descclassname">stc.</code><code class="sig-name descname">SparseTensorClassifier</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">targets</span></em>, <em class="sig-param"><span class="n">features</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">collapse</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">engine</span><span class="o">=</span><span class="default_value">'sqlite://'</span></em>, <em class="sig-param"><span class="n">prefix</span><span class="o">=</span><span class="default_value">'stc'</span></em>, <em class="sig-param"><span class="n">chunksize</span><span class="o">=</span><span class="default_value">100</span></em>, <em class="sig-param"><span class="n">cache</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">power</span><span class="o">=</span><span class="default_value">0.5</span></em>, <em class="sig-param"><span class="n">balance</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">entropy</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">loss</span><span class="o">=</span><span class="default_value">'norm'</span></em>, <em class="sig-param"><span class="n">tol</span><span class="o">=</span><span class="default_value">1e-15</span></em><span class="sig-paren">)</span><a class="headerlink" href="#stc.SparseTensorClassifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>The input data must be structured as follows:
+‘data’: [{‘key1’: [value1, value2, …, valueN], ‘key2’: [], …, ‘keyN’: []}]
+Such that each ‘keyN’ is a feature and a dimension of the tensor, while
+each valueN corresponds to a index position in the tensor structure.
+The internal sparse representation of the tensor ia a table of the form:
+v1, v2, …, vn, score
+where each tuple corresponds to a non zero entry of the tensor along the coordinates
+given by v1, v2, …, vn
+The score corresponds to probability up to a normalization factor</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>engine</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Engine</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – connection to the DB</p></li>
+<li><p><strong>features</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]]) – features of the tensor</p></li>
+<li><p><strong>collapse</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – merge dimensions. Default True</p></li>
+<li><p><strong>prefix</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – prefix to use in the DB tables</p></li>
+<li><p><strong>chunksize</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of items per chunk</p></li>
+<li><p><strong>cache</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – cache weights to boost performance</p></li>
+<li><p><strong>targets</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – target variable(s)</p></li>
+<li><p><strong>balance</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – artificially balance the sample</p></li>
+<li><p><strong>power</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – probability power</p></li>
+<li><p><strong>loss</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – loss function. Use ‘norm’ for p-norm(1) loss or ‘log’ for cross-entropy.</p></li>
+<li><p><strong>entropy</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – use entropic weights</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="stc.SparseTensorClassifier.clean">
+<code class="sig-name descname">clean</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">deep</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#stc.SparseTensorClassifier.clean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Drop DB (tmp) tables</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="stc.SparseTensorClassifier.close">
+<code class="sig-name descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#stc.SparseTensorClassifier.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close DB connection</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="stc.SparseTensorClassifier.connect">
+<code class="sig-name descname">connect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#stc.SparseTensorClassifier.connect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Connect to DB</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="stc.SparseTensorClassifier.explain">
+<code class="sig-name descname">explain</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">features</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#stc.SparseTensorClassifier.explain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Global Explainability</p>
+<p>Use the corpus to compute weights.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>features</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]]) – features to use</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>DataFrame of weights</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="stc.SparseTensorClassifier.fit">
+<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">items</span></em>, <em class="sig-param"><span class="n">keep_items</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">if_exists</span><span class="o">=</span><span class="default_value">'fail'</span></em>, <em class="sig-param"><span class="n">clean</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#stc.SparseTensorClassifier.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Feed the Tensor</p>
+<p>Add the features to the dictionary and update the DB. Store the data and create the corpus.
+Ready to use in an online learning context.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>items</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>], <code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>]) – the data in JSON or tabular format</p></li>
+<li><p><strong>keep_items</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – store items in the train table. If False, store the corpus only, without individual items</p></li>
+<li><p><strong>if_exists</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – one of ‘fail’, ‘append’, ‘replace’. Actions to take if the tensor tables already exist</p></li>
+<li><p><strong>clean</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – invalidate cache</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="stc.SparseTensorClassifier.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">params</span></em><span class="sig-paren">)</span><a class="headerlink" href="#stc.SparseTensorClassifier.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get params</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="stc.SparseTensorClassifier.learn">
+<code class="sig-name descname">learn</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">test_size</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">train_size</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">stratify</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">priority</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">max_features</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">max_actions</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">max_iter</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">max_runtime</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">random_state</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#stc.SparseTensorClassifier.learn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Learn the Best Policy via Reinforcement Learning</p>
+<p>Optimize the evaluation metric via cross validation.
+For each episode, split the train set in train-validation sets.
+Start with a set of empy features and compute the reward of the state (-loss).
+Add the value to the Q-table. Explore all the next states generated by adding 1 feature to the empty set.
+Compute the values of the states. Add to the Q-table. Select the state with the maximum value.
+Move to that state. Explore all the next states generated by adding 1 feature to the current set of features…
+Stop when all features are used or when the value of all the next states is less than the value of the current
+state.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>max_runtime</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – how long to train the algorithm, in seconds. If 0, no time limit.</p></li>
+<li><p><strong>max_iter</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – maximum number of iterations to train the algorithm. If 0, no limit.</p></li>
+<li><p><strong>test_size</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>]) – train-test cross validation split</p></li>
+<li><p><strong>train_size</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>]) – train-test cross validation split</p></li>
+<li><p><strong>stratify</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – if True, the folds are made by preserving the percentage of samples for each class</p></li>
+<li><p><strong>max_features</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of maximum features to return in the policy. 0 -&gt; no limit</p></li>
+<li><p><strong>max_actions</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of maximum states to explore at once. 0 -&gt; no limit</p></li>
+<li><p><strong>priority</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]]) – list of features to learn first</p></li>
+<li><p><strong>random_state</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>]) – random number generator seed. Pass an int for reproducible output across function calls.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]], <code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>]]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>tuple of (best policy, loss)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="stc.SparseTensorClassifier.policy">
+<code class="sig-name descname">policy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#stc.SparseTensorClassifier.policy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate the best policy according to the Q-table</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]], <code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="stc.SparseTensorClassifier.predict">
+<code class="sig-name descname">predict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">items</span></em>, <em class="sig-param"><span class="n">policy</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">probability</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">explain</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#stc.SparseTensorClassifier.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Predict</p>
+<p>Use the tensor to predict the data.
+The target variable(s) can be multidimensional, i.e. predict both variable A and B at the same time.
+The features to use for predictions are given by the policy. The algorithm starts with the first element
+of the policy. If it fails, the second element is used, and so on. If the policy ends with the empy list []
+then all items will be predicted (eventually using no features, i.e. they will be attributed the most likely
+class in the trainig set). If not, the prediction may miss for some items.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>items</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>], <code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>]) – the data in JSON or tabular format</p></li>
+<li><p><strong>policy</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]]]) – list of lists of features to use for prediction. First lists are applied first</p></li>
+<li><p><strong>explain</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – return weights for interpretability</p></li>
+<li><p><strong>probability</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – return probability table</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>], <code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>]]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>tuple of (classification, probability, interpretability)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="stc.SparseTensorClassifier.read_sql">
+<code class="sig-name descname">read_sql</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sql</span></em><span class="sig-paren">)</span><a class="headerlink" href="#stc.SparseTensorClassifier.read_sql" title="Permalink to this definition">¶</a></dt>
+<dd><p>SQL to pandas</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="stc.SparseTensorClassifier.set">
+<code class="sig-name descname">set</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">params</span></em><span class="sig-paren">)</span><a class="headerlink" href="#stc.SparseTensorClassifier.set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set params</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="stc.SparseTensorClassifier.to_sql">
+<code class="sig-name descname">to_sql</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">table</span></em>, <em class="sig-param"><span class="n">if_exists</span><span class="o">=</span><span class="default_value">'fail'</span></em>, <em class="sig-param"><span class="n">dtype</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#stc.SparseTensorClassifier.to_sql" title="Permalink to this definition">¶</a></dt>
+<dd><p>pandas to SQL</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+          </div>
+          <div class="page-nav">
+            <div class="inner"><ul class="page-nav">
+  <li class="prev">
+    <a href="index.html"
+       title="previous chapter">← Sparse Tensor Classifier</a>
+  </li>
+  <li class="next">
+    <a href="tutorials.html"
+       title="next chapter">Tutorials →</a>
+  </li>
+</ul><div class="footer" role="contentinfo">
+      &#169; Copyright 2020, E Guidotti, A Ferrara.
+    <br>
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.3 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a>.
+</div>
+            </div>
+          </div>
+      </page>
+    </div>
+    
+    
+  </body>
+</html>
