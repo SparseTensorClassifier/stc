@@ -25,3 +25,8 @@ jobs:
       run: |
         cd docs
         make html
+    - name: Commit changes
+      run: |
+        git add .
+        git commit
+        git push origin gh-pages
