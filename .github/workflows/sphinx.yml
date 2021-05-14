@@ -9,7 +9,6 @@ jobs:
   docs:
     runs-on: ubuntu-latest
     steps:
-    - name: Build sphinx
     - uses: actions/checkout@v1
     - uses: ammaraskar/sphinx-action@master
       with:
