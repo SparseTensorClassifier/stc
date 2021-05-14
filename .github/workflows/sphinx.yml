@@ -12,6 +12,7 @@ jobs:
     steps:
     - name: Credentials
       run: |
+        git init
         git config --global user.email "$(git show --format=%ae -s)"
         git config --global user.name "$(git show --format=%an -s)"
     - uses: actions/checkout@v1
