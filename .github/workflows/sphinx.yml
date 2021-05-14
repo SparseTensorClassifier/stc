@@ -30,7 +30,8 @@ jobs:
       run: |
         cd docs
         make html
-    - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@4.1.3
-        with:
-          branch: gh-pages
+    - name: Commit changes
+      run: |
+        git add .
+        git commit
+        git push origin gh-pages
