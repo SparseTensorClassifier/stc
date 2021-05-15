@@ -40,6 +40,7 @@ release = '0.1.0'
 # ones.
 extensions = [
 	'sphinx.ext.autodoc',
+	'sphinx.ext.autosummary',
 	'sphinx.ext.githubpages',
 	'sphinx_autodoc_typehints',
 	'sphinxcontrib.googleanalytics',

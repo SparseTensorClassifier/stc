@@ -17,27 +17,69 @@ from typing import Union, Any, List, Tuple, FrozenSet
 
 
 class SparseTensorClassifier:
-    """The input data must be structured as follows:
-    'data': [{'key1': [value1, value2, ..., valueN], 'key2': [], ..., 'keyN': []}]
-    Such that each 'keyN' is a feature and a dimension of the tensor, while
-    each valueN corresponds to a index position in the tensor structure.
-    The internal sparse representation of the tensor ia a table of the form:
-    v1, v2, ..., vn, score
-    where each tuple corresponds to a non zero entry of the tensor along the coordinates
-    given by v1, v2, ..., vn
-    The score corresponds to probability up to a normalization factor
+    """
+    This class implements the Sparse Tensor Classifier (STC), a supervised classification algorithm for categorical
+    data inspired by the notion of superposition of states in quantum physics. It supports multiclass and multilabel
+    classification, online learning, prior knowledge, automatic dataset balancing, missing data, and provides a native
+    explanation of its predictions both for single instances and for each target class label globally.
 
-    :param engine: connection to the DB
-    :param features: features of the tensor
-    :param collapse: merge dimensions. Default True
-    :param prefix: prefix to use in the DB tables
-    :param chunksize: number of items per chunk
-    :param cache: cache weights to boost performance
-    :param targets: target variable(s)
-    :param balance: artificially balance the sample
-    :param power: probability power
-    :param loss: loss function. Use 'norm' for p-norm(1) loss or 'log' for cross-entropy.
-    :param entropy: use entropic weights
+    The algorithm is implemented in SQL. By default, the library uses an in-memory SQLite database, shipped with
+    Python standard library, that require no configuration by the user. However, it is possible to configure STC to
+    run on alternative DBMS in order to take advantage of persistent storage and scalability. Supported DBMS are:
+    **SQLite** v3.24+;
+    **MySQL** v8.0+;
+    **PostgreSQL** 9.6+;
+    **SQL Server** 2017+;
+    **Oracle** 12.2+.
+
+    The input data must be a pandas ``DataFrame`` or a JSON structured as follows:
+
+    .. code-block:: python
+
+        data = [
+            {'key1': [value1, value2, ..., valueN], 'key2': [], ..., 'keyN': []},
+            ...
+            {'key1': [value1, value2, ..., valueN], 'key2': [], ..., 'keyN': []},
+        ]
+
+    Such that each dictionary represents an item where each ``key`` is a feature associated to one or more ``values``.
+    This makes easy to deal with multi-valued attributes. STC also supports input data in the form of pandas
+    ``DataFrame`` for tabular data, where each row represents an item, each column represents a ``key`` and each cell
+    represents a ``value``. STC deals with **categorical data** only and all the ``values`` are internally
+    converted to strings. Continuous features should be discretized first.
+
+    :param targets: The target variable(s). In the notation above, this is the list of ``keys`` to predict.
+    :param features: In the notation above, this is the list of ``keys`` to use for prediction.
+    :param collapse: If ``True`` (the default) merges all the ``features`` into a unique ``key`` and STC reduces to a
+                     matrix-based approach. This is fast and efficient, and recommended for tabular data.
+                     When ``False``, the items are represented with the cartesian product among
+                     the ``values`` in each ``key``. In this case, it is needed a policy to avoid degenerate probability
+                     estimates in the prediction phase. The policy can be arbitrarily specified or automatically learnt
+                     with :meth:`stc.SparseTensorClassifier.learn`
+    :param engine: Connection to database in the form of a
+                   `SQLAlchemy engine <https://docs.sqlalchemy.org/en/13/core/engines.html>`_.
+                   By default, STC uses an in-memory SQLite database. The list of supported DBMS is provided above.
+    :param prefix: Prefix to use in the database tables. STC instances initialized with different prefix are completely
+                   independent. This makes possible to use the same ``engine`` multiple times with different ``prefix``,
+                   without creating a new database/schema. If an instance associated with the same ``engine`` and
+                   ``prefix`` is found on the database, then STC is initialized from the database.
+    :param chunksize: Number of items to fit and predict per chunk. May impact the computational time.
+    :param cache: If ``True`` (the default) caches fitted weights to improve performance. The cache can be cleaned with
+                  :meth:`stc.SparseTensorClassifier.clean` and it is automatically cleaned each time new data are fitted
+                  with :meth:`stc.SparseTensorClassifier.fit`
+    :param power: Hyper-parameter. Smaller values give similar weight to all the features regardless of their
+                  frequency. Usually between 0 and 1.
+    :param balance: Hyper-parameter. The sample is artificially balanced when setting ``balance=1``. It is not balanced
+                    with ``balance=0``. For values between 0 and 1 the sample is semi-balanced, increasing the weight
+                    of the less frequent classes but not enough to have a balanced sample. For values greater than 1 the
+                    sample is super-balanced, where the weight of the less frequent classes is greater than the weight
+                    of the most frequent classes.
+    :param entropy: Hyper-parameter. Higher values lead to predictions based on less but more relevant features,
+                    thus more robust to noise. Usually between 0 and 1.
+    :param loss: Loss function used in :meth:`stc.SparseTensorClassifier.learn`. Use ``norm`` for Manhattan Distance
+                 or ``log`` for cross-entropy (log-loss).
+    :param tol: The actual predicted probabilities are replaced with the value of ``tol`` when using ``loss='log'`` and
+                the actual predicted probability is zero.
     """
 
     def __init__(self, targets: List[str], features: List[str] = None, collapse: bool = True,
@@ -154,7 +196,10 @@ class SparseTensorClassifier:
     """""""""""""""""""""""""""""""""""""""""""""
 
     def connect(self) -> None:
-        """Connect to DB"""
+        """
+        Open the connection to the database.
+
+        """
 
         self.conn = self.engine.connect()
 
@@ -164,12 +209,20 @@ class SparseTensorClassifier:
             self.conn.connection.create_function("LOG", 1, np.log)
 
     def close(self) -> None:
-        """Close DB connection"""
+        """
+        Close the connection to the database.
+
+        """
 
         self.conn.close()
 
     def clean(self, deep: bool = False) -> None:
-        """Drop DB (tmp) tables"""
+        """
+        Clean the database.
+
+        :param deep: If ``False`` (the default) drops temporary tables and cache. If ``True``, deletes all tables and
+                     closes the connection.
+        """
 
         # drop tmp tables
         tmp = self._meta(key=self.tmp_table)
@@ -188,7 +241,15 @@ class SparseTensorClassifier:
             self.close()
 
     def set(self, params: dict) -> None:
-        """Set params"""
+        """
+        Set parameters. Changing parameters does NOT need to re-fit STC. The fitting of STC is independent
+        from the parameters. In particular, also the ``targets`` can be changed on the fly (if initialized
+        with ``collapse=False``).
+
+        :param params: Dictionary of parameters to set in the form of ``{'param': value}``. Supported parameters are:
+                       ``targets``, ``chunksize``, ``cache``, ``power``, ``balance``, ``entropy``, ``loss``, ``tol``.
+
+        """
 
         allow = {"chunksize", "cache", "targets", "power", "balance", "entropy", "loss", "tol"}
         keys = params.keys()
@@ -209,7 +270,12 @@ class SparseTensorClassifier:
         self.qtable = self._meta(key=self._qkey(), default={})
 
     def get(self, params: Union[str, List[str]]) -> Any:
-        """Get params"""
+        """
+        Get parameters. Read the parameters provided upon initialization.
+        
+        :param params: Name(s) of the parameters to return.
+        :return: Value(s) of the parameters.
+        """""
 
         def get_param(param):
             val = getattr(self, param)
@@ -226,22 +292,30 @@ class SparseTensorClassifier:
 
         return val
 
-    def fit(self, items: Union[List[dict], pd.DataFrame], keep_items: bool = True, if_exists: str = "fail",
+    def fit(self, items: Union[List[dict], pd.DataFrame], keep_items: bool = None, if_exists: str = "fail",
             clean: bool = True) -> None:
-        """Feed the Tensor
+        """
+        Fit the training data. The data must contain both ``targets`` and ``features`` and must be structured
+        as described above. Supports incremental fit and it is ready to use in an online learning context.
 
-        Add the features to the dictionary and update the DB. Store the data and create the corpus.
-        Ready to use in an online learning context.
-
-        :param items: the data in JSON or tabular format
-        :param keep_items: store items in the train table. If False, store the corpus only, without individual items
-        :param if_exists: one of 'fail', 'append', 'replace'. Actions to take if the tensor tables already exist
-        :param clean: invalidate cache
+        :param items: The training data in JSON or tabular format as described above.
+        :param keep_items: If ``True``, stores the individual items seen during fit. This requires longer computational
+                           times but allows to estimate the policy with :meth:`stc.SparseTensorClassifier.learn`.
+                           By default, it is ``False`` when ``collapse=True`` or when only
+                           a single ``target`` and a single ``feature`` have been provided upon initialization. In this
+                           case, there is no need to estimate the policy and no need to store the individual items.
+        :param if_exists: The action to take if STC has already been fitted. One of ``fail``: raise exception,
+                          ``append``: incremental fit in online learning, ``replace``: re-fit from scratch.
+        :param clean: If ``True`` (the default) invalidates the cache used for prediction.
         """
 
         # clean cache
         if clean:
             self.clean()
+
+        # keep items
+        if keep_items is None:
+            keep_items = False if len(self.dims) == 2 else True
 
         # sanitize
         items_all = self._stringify(items)
@@ -303,12 +377,11 @@ class SparseTensorClassifier:
             progress.update(c + self.chunksize)
 
     def explain(self, features: List[str] = None) -> pd.DataFrame:
-        """Global Explainability
+        """
+        Global explainability. Compute the global contribution of each feature value to each target class label.
 
-        Use the corpus to compute weights.
-
-        :param features: features to use
-        :return: DataFrame of weights
+        :param features: The features to use. By default, it uses the ``features`` used for prediction.
+        :return: Global explainability table giving the contribution of each feature value to each target class label.
         """
 
         # features
@@ -334,20 +407,35 @@ class SparseTensorClassifier:
 
     def predict(self, items: Union[List[dict], pd.DataFrame], policy: List[List[str]] = None, probability: bool = True,
                 explain: bool = True) -> Tuple[pd.DataFrame, Union[pd.DataFrame, None], Union[pd.DataFrame, None]]:
-        """Predict
+        """
+        Predict the test data. The data must be structured as described above and must contain the ``features``.
+        All additional keys are ignored (included ``targets``).
+        If all the attributes of an item are associated with features never seen in the training set, STC will not be
+        able to provide a prediction. In this case, a fallback mechanism is needed: the ``policy``. The ``policy`` is
+        a list of sets of features to use subsequently for prediction.
+        The algorithm starts with the first element of the policy (first set of features).
+        If no prediction could be produced, the second set of features is used, and so on.
+        If the policy ends with the empy list ``[]``, then all the item are guaranteed to be predicted
+        (eventually using no features, i.e., they will be attributed the most likely class in the trainig set).
+        If the policy does not end with the empy list ``[]``, some predictions may miss for some items.
 
-        Use the tensor to predict the data.
-        The target variable(s) can be multidimensional, i.e. predict both variable A and B at the same time.
-        The features to use for predictions are given by the policy. The algorithm starts with the first element
-        of the policy. If it fails, the second element is used, and so on. If the policy ends with the empy list []
-        then all items will be predicted (eventually using no features, i.e. they will be attributed the most likely
-        class in the trainig set). If not, the prediction may miss for some items.
-
-        :param items: the data in JSON or tabular format
-        :param policy: list of lists of features to use for prediction. First lists are applied first
-        :param explain: return weights for interpretability
-        :param probability: return probability table
-        :return: tuple of (classification, probability, interpretability)
+        :param items: The test data in JSON or tabular format as described above.
+        :param policy: List of lists of features to use for prediction, such as ``[[f1,f2],[f1],[]]``.
+                       First lists are applied first. By default, it uses the policy ``[[features],[]]`` when
+                       only one feature is provided upon initialization or when ``collapse=True``. In the other cases,
+                       it uses the policy ``[[features]]`` and raises a warning as some predictions may miss for some
+                       items. If a policy has been learnt with :meth:`stc.SparseTensorClassifier.learn`, it uses that
+                       policy instead.
+        :param probability: If ``True`` (the default) returns the probability of the target class label for
+                            each predicted item. If ``False``, and also ``explain=False``, returns the final
+                            classification only (saves computational time).
+        :param explain: If ``True`` (the default) returns the contribution of each feature to the target class label
+                        for each predicted item.
+        :return: Tuple of (classification, probability, explainability). The classification table contains the final
+                 predictions for each item. Missing predictions are encoded as ``NaN``. The probability table contains
+                 the probabilities of the target class labels for each predicted item. Labels that do not appear in
+                 this table are associated with zero probability. The explainability table provides the contribution of
+                 each feature to the target class label for each predicted item.
         """
 
         # sanitize
@@ -468,9 +556,9 @@ class SparseTensorClassifier:
               priority: List[str] = None, max_features: int = 0, max_actions: int = 0,
               max_iter: int = 1, max_runtime: int = 0, random_state: bool = None) \
             -> Tuple[List[List[str]], List[float]]:
-        """Learn the Best Policy via Reinforcement Learning
-
-        Optimize the evaluation metric via cross validation.
+        """
+        Learn the ``policy``. Learn the ``policy`` via reinforcement learning by optimizing the ``loss`` function
+        on cross validation. Before learning, STC must be fitted with ``keep_items=True``. Then, proceeds as follows.
         For each episode, split the train set in train-validation sets.
         Start with a set of empy features and compute the reward of the state (-loss).
         Add the value to the Q-table. Explore all the next states generated by adding 1 feature to the empty set.
@@ -479,16 +567,18 @@ class SparseTensorClassifier:
         Stop when all features are used or when the value of all the next states is less than the value of the current
         state.
 
-        :param max_runtime: how long to train the algorithm, in seconds. If 0, no time limit.
-        :param max_iter: maximum number of iterations to train the algorithm. If 0, no limit.
-        :param test_size: train-test cross validation split
-        :param train_size: train-test cross validation split
-        :param stratify: if True, the folds are made by preserving the percentage of samples for each class
-        :param max_features: number of maximum features to return in the policy. 0 -> no limit
-        :param max_actions: number of maximum states to explore at once. 0 -> no limit
-        :param priority: list of features to learn first
-        :param random_state: random number generator seed. Pass an int for reproducible output across function calls.
-        :return: tuple of (best policy, loss)
+        :param test_size: Train-test cross validation split (percentage of the training sample).
+        :param train_size: Train-test cross validation split (percentage of the training sample).
+        :param stratify: If ``True``, the folds are made by preserving the percentage of samples for each class.
+        :param priority: List of features to learn first.
+        :param max_features: Number of maximum features to return in the policy. If 0, no limit.
+        :param max_actions: Number of maximum states to explore at once. If 0, no limit.
+        :param max_iter: Maximum number of iterations to train the algorithm. If 0, no limit.
+        :param max_runtime: How long to train the algorithm, in seconds. If 0, no time limit.
+        :param random_state: Random number generator seed, used for reproducible output across function calls.
+        :return: Tuple of (policy, loss). The policy is saved internally and used by default in
+                 :meth:`stc.SparseTensorClassifier.predict`. The second element of the tuple provides the loss
+                 associated with the policy.
         """
 
         # validate
@@ -621,7 +711,11 @@ class SparseTensorClassifier:
         return self.policy()
 
     def policy(self) -> Tuple[List[List[str]], List[float]]:
-        """Generate the best policy according to the Q-table"""
+        """
+        Get the ``policy``.
+
+        :return: Output of :meth:`stc.SparseTensorClassifier.learn`
+        """
 
         # init state and values
         state, values = [], []
@@ -649,12 +743,25 @@ class SparseTensorClassifier:
         return state, values
 
     def read_sql(self, sql: str) -> pd.DataFrame:
-        """SQL to pandas"""
+        """
+        Read SQL query into a pandas ``DataFrame``.
+
+        :param sql: SQL query to SELECT data.
+        :return: Output of the SQL query.
+        """
 
         return pd.read_sql(sql, self.conn)
 
-    def to_sql(self, x: pd.DataFrame, table: str, if_exists: str = 'fail', dtype: dict = None) -> None:
-        """pandas to SQL"""
+    def to_sql(self, x: pd.DataFrame, table: str, if_exists: str = 'fail') -> None:
+        """
+        Write a pandas ``DataFrame`` into a SQL table.
+
+        :param x: A pandas ``DataFrame`` to write into ``table``.
+        :param table: The name of the table to write ``x`` into.
+        :param if_exists: The action to take when the table already exists. One of ``fail``: raise exception,
+                          ``append``: insert new values to the existing table, ``replace``: drop the table before
+                          inserting new values.
+        """
 
         def csv_insert(table, conn, keys, data_iter):
             x = pd.DataFrame(list(data_iter))
@@ -675,7 +782,7 @@ class SparseTensorClassifier:
                 conn.execute(sql)
 
         # SQL Server requires chunksize=1000: maximum allowed rows in bulk insert.
-        x.to_sql(table, self.conn, dtype=dtype, if_exists=if_exists, index=False, method=csv_insert, chunksize=1000)
+        x.to_sql(table, self.conn, if_exists=if_exists, index=False, method=csv_insert, chunksize=1000)
 
     """""""""""""""""""""""""""""""""""""""""""""
     PRIVATE METHODS

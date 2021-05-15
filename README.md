@@ -44,10 +44,8 @@ Get started with more advanced [tutorials](https://github.com/SparseTensorClassi
 ```latex
 @Misc{stc2021,
   title = {An Explainable Probabilistic Classifier for Categorical Data Inspired to Quantum Physics},
-  author = {Autori...},
+  author = {Guidotti, Emanuele and Ferrara, Alfio},
   year = {2021},
-  eprint = {arXiv:2101.00086},
-  url = {https://arxiv.org/abs/...}
 }
 ```
 

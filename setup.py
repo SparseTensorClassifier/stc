@@ -18,9 +18,9 @@ setup(
     description='Sparse Tensor Classifier',
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url='https://sparsetensorclassifier.com',
+    url='https://sparsetensorclassifier.org',
     project_urls={
-        'Documentation': 'https://sparsetensorclassifier.com/docs/',
+        'Documentation': 'https://sparsetensorclassifier.org/docs/',
         'Source': 'https://github.com/sparsetensorclassifier',
         'Tracker': 'https://github.com/sparsetensorclassifier/stc/issues',
     },
