@@ -873,7 +873,7 @@ class SparseTensorClassifier:
             for data in items:
                 item = {self.collapse_key: []} if self.collapse else {}
                 for key, val in data.items():
-                    key, val = str(key), val if isinstance(val, list) else [val]
+                    key, val = str(key), val if isinstance(val, (set, list)) else [val]
                     if key in self.collapse:
                         item[self.collapse_key] += [key + ": " + str(v) for v in val]
                     elif key in dims:
@@ -1169,14 +1169,22 @@ class SparseTensorClassifier:
                                  f" Item {rid} has no value for '{dim}' and it will be ignored."
                                  f" Consider setting a string to represent the missing value(s).")
                         elif dim in self.dims_map:
+                            m = 0
                             k = self.dims_map[dim]
                             for v, n in Counter(value_list).most_common():
+                                v = self.values_map[k][v]
+                                if v == -1:
+                                    m += n
+                                else:
+                                    # insert values
+                                    rows.append({
+                                        self.item_field: i, self.dim_field: k,
+                                        self.value_field: v, self.score_field: n})
+                            if m > 0:
+                                # insert missing values
                                 rows.append({
-                                    self.item_field: i,
-                                    self.dim_field: k,
-                                    self.value_field: self.values_map[k][v],
-                                    self.score_field: n
-                                })
+                                    self.item_field: i, self.dim_field: k,
+                                    self.value_field: -1, self.score_field: m})
 
                 # convert to data frame
                 x = pd.DataFrame(rows)
