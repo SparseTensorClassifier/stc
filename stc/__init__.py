@@ -873,7 +873,7 @@ class SparseTensorClassifier:
             for data in items:
                 item = {self.collapse_key: []} if self.collapse else {}
                 for key, val in data.items():
-                    key, val = str(key), val if isinstance(val, (set, list)) else [val]
+                    key, val = str(key), val if isinstance(val, list) else [val]
                     if key in self.collapse:
                         item[self.collapse_key] += [key + ": " + str(v) for v in val]
                     elif key in dims:
