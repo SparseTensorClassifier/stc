@@ -2,6 +2,7 @@
 
 import sys
 import csv
+import sqlite3
 import pandas as pd
 import numpy as np
 from warnings import warn
@@ -25,12 +26,8 @@ class SparseTensorClassifier:
 
     The algorithm is implemented in SQL. By default, the library uses an in-memory SQLite database, shipped with
     Python standard library, that require no configuration by the user. However, it is possible to configure STC to
-    run on alternative DBMS in order to take advantage of persistent storage and scalability. Supported DBMS are:
-    **SQLite** v3.24+;
-    **MySQL** v8.0+;
-    **PostgreSQL** 9.6+;
-    **SQL Server** 2017+;
-    **Oracle** 12.2+.
+    run on `alternative DBMS <https://github.com/SparseTensorClassifier/tutorial/blob/main/Quickstart_DBMS.ipynb>`_
+    in order to take advantage of persistent storage and scalability.
 
     The input data must be a pandas ``DataFrame`` or a JSON structured as follows:
 
@@ -1439,9 +1436,8 @@ class SparseTensorClassifier:
 
         if self.db == "sqlite":
             sql = (
-                f"INSERT INTO {self.meta_table} ({self.name_field}, {self.value_field}) "
-                f"VALUES ('{key}', :value) "
-                f"ON CONFLICT ({self.name_field}) DO UPDATE SET {self.value_field}=excluded.{self.value_field}")
+                f"INSERT OR REPLACE INTO {self.meta_table} ({self.name_field}, {self.value_field}) "
+                f"VALUES ('{key}', :value)")
         elif self.db == "postgresql":
             sql = (
                 f"INSERT INTO {self.meta_table} ({self.name_field}, {self.value_field}) "
@@ -1499,12 +1495,19 @@ class SparseTensorClassifier:
             data = self._SELECT_data(dims=dims, items_table=items_table, corpus=True)
 
         if self.db == "sqlite":
-            sql = (
-                f"WITH corpus_ AS ({data}) "
-                f"INSERT INTO {corpus_table} ({d}, {s}) "
-                f"SELECT * FROM corpus_ WHERE true "
-                f"ON CONFLICT ({d}) "
-                f"DO UPDATE SET {s}={corpus_table}.{s}+excluded.{s}")
+            if sqlite3.sqlite_version_info < (3, 24, 0):
+                sql = (
+                    f"WITH corpus_ AS ({data}) "
+                    f"INSERT OR REPLACE INTO {corpus_table} ({d}, {s}) "
+                    f"SELECT {self._COLS('corpus_', dims)}, corpus_.{s}+COALESCE({corpus_table}.{s}, 0) AS {s} "
+                    f"FROM corpus_ LEFT JOIN {corpus_table} {self._ON_NATURAL('corpus_', corpus_table, dims)}")
+            else:
+                sql = (
+                    f"WITH corpus_ AS ({data}) "
+                    f"INSERT INTO {corpus_table} ({d}, {s}) "
+                    f"SELECT * FROM corpus_ WHERE true "
+                    f"ON CONFLICT ({d}) "
+                    f"DO UPDATE SET {s}={corpus_table}.{s}+excluded.{s}")
         elif self.db == "postgresql":
             sql = (
                 f"WITH corpus_ AS ({data}) "

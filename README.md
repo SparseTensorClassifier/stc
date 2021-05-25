@@ -2,11 +2,11 @@
 
 Sparse Tensor Classifier (STC) is a supervised classification algorithm for categorical data inspired by the notion of superposition of states in quantum physics. It supports multiclass and multilabel classification, online learning, prior knowledge, automatic dataset balancing, missing data, and provides a native explanation of its predictions both for single instances and for each target class label globally. 
 
-The algorithm is implemented in SQL and made available via the Python module ``stc`` on [PyPI](https://pypi.org/project/stc/). By default, the library uses an in-memory SQLite database, shipped with Python standard library, that require no configuration by the user. However, it is possible to configure STC to run on alternative DBMS in order to take advantage of persistent storage and scalability.
+The algorithm is implemented in SQL and made available via the Python module ``stc`` on [PyPI](https://pypi.org/project/stc/). By default, the library uses an in-memory SQLite database, shipped with Python standard library, that require no configuration by the user. However, it is possible to configure STC to run on [alternative DBMS](https://github.com/SparseTensorClassifier/tutorial/blob/main/Quickstart_DBMS.ipynb) in order to take advantage of persistent storage and scalability.
 
 ## Quickstart
 
-Install ``stc`` from [PyPI](https://pypi.org/project/stc/) and make sure to be running ``Python >=3.7``
+Install ``stc`` from [PyPI](https://pypi.org/project/stc/). We recommend using `Python>=3.7` and `SQLite>=3.24.0` for better performance.
 
 ```python
 pip install stc
@@ -53,4 +53,4 @@ ___
 
 
 
-![](./docs/source/_static/img/logo.svg)
+![](https://raw.githubusercontent.com/SparseTensorClassifier/stc/main/docs/source/_static/img/logo.svg)

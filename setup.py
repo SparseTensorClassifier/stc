@@ -1,17 +1,14 @@
 from setuptools import setup
 
-with open('requirements.txt') as file:
-    install_requires = file.read().splitlines()
-
 with open("README.md", "r", encoding="UTF-8") as file:
     long_description = file.read()
 
 setup(
     name='stc',
-    version='0.2.0',
+    version='0.2.3',
     packages=['stc'],
-    python_requires='>=3.7',
-    install_requires=install_requires,
+    python_requires='>=3',
+    install_requires=['numpy', 'pandas', 'sqlalchemy'],
     license='GPLv3',
     author='Emanuele Guidotti',
     author_email='emanuele.guidotti@unine.ch',
@@ -30,6 +27,7 @@ setup(
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Operating System :: OS Independent',
         'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
