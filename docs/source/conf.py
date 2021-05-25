@@ -62,6 +62,9 @@ googleanalytics_id = 'UA-000'
 # Open Graph
 ogp_site_url = 'https://sparsetensorclassifier.org'
 ogp_image = 'https://sparsetensorclassifier.org/_static/img/logo.png'
+ogp_custom_meta_tags = [
+    '<meta property="og:description" content="An Explainable Probabilistic Classifier for Categorical Data Inspired to Quantum Physics" />',
+]
 
 # Sitemap
 html_baseurl = 'https://sparsetensorclassifier.org'
