@@ -9,7 +9,7 @@ An Explainable Probabilistic Classifier for Categorical Data Inspired to Quantum
 
 **Cite as**. Guidotti E., Ferrara A., (2021). "*An Explainable Probabilistic Classifier for Categorical Data Inspired to Quantum Physics*"
 
-A BibTeX entry for LaTeX users is 
+A BibTeX entry for LaTeX users is:
 
 .. code-block:: latex
 

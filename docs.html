@@ -196,7 +196,7 @@ estimates in the prediction phase. The policy can be arbitrarily specified or au
 with <a class="reference internal" href="#stc.SparseTensorClassifier.learn" title="stc.SparseTensorClassifier.learn"><code class="xref py py-meth docutils literal notranslate"><span class="pre">stc.SparseTensorClassifier.learn()</span></code></a></p></li>
 <li><p><strong>engine</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Engine</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – Connection to database in the form of a
 <a class="reference external" href="https://docs.sqlalchemy.org/en/13/core/engines.html">SQLAlchemy engine</a>.
-By default, STC uses an in-memory SQLite database. The list of supported DBMS is provided above.</p></li>
+By default, STC uses an in-memory SQLite database.</p></li>
 <li><p><strong>prefix</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – Prefix to use in the database tables. STC instances initialized with different prefix are completely
 independent. This makes possible to use the same <code class="docutils literal notranslate"><span class="pre">engine</span></code> multiple times with different <code class="docutils literal notranslate"><span class="pre">prefix</span></code>,
 without creating a new database/schema. If an instance associated with the same <code class="docutils literal notranslate"><span class="pre">engine</span></code> and

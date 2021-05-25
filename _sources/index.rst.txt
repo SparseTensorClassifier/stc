@@ -21,7 +21,7 @@ The algorithm is implemented in SQL and made available via the Python module ``s
 Quickstart
 ====================================================
 
-Install ``stc`` from `PyPI <https://pypi.org/project/stc/>`_ and make sure to be running ``Python >=3.7``
+Install ``stc`` from `PyPI <https://pypi.org/project/stc/>`_. We recommend using `Python>=3.7` and `SQLite>=3.24.0` for better performance.
 
 .. code-block:: python
 
