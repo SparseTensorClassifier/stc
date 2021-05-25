@@ -8,7 +8,7 @@ with open("README.md", "r", encoding="UTF-8") as file:
 
 setup(
     name='stc',
-    version='0.1.0',
+    version='0.2.0',
     packages=['stc'],
     python_requires='>=3.7',
     install_requires=install_requires,
@@ -20,7 +20,7 @@ setup(
     long_description_content_type="text/markdown",
     url='https://sparsetensorclassifier.org',
     project_urls={
-        'Documentation': 'https://sparsetensorclassifier.org/docs/',
+        'Documentation': 'https://sparsetensorclassifier.org/docs.html',
         'Source': 'https://github.com/sparsetensorclassifier',
         'Tracker': 'https://github.com/sparsetensorclassifier/stc/issues',
     },
