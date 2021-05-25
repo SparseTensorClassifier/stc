@@ -118,12 +118,6 @@
           </li>
 
         
-          <li class="toctree-l1 "><a href="tutorials.html" class="reference internal ">Tutorials</a>
-
-            
-          </li>
-
-        
           <li class="toctree-l1 "><a href="references.html" class="reference internal ">References</a>
 
             
@@ -167,7 +161,8 @@
 <h1>Sparse Tensor Classifier<a class="headerlink" href="#sparse-tensor-classifier" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
-<p>Sparse Tensor Classifier (STC) is a supervised classification algorithm for categorical data inspired by the notion of superposition of states in quantum physics. It supports multiclass and multilabel classification, online learning, prior knowledge, automatic dataset balancing, missing data, and provides a native explanation of its predictions both for single instances and for each target class label globally. The algorithm is implemented in SQL and made available via the Python module <code class="docutils literal notranslate"><span class="pre">stc</span></code> on <a class="reference external" href="https://pypi.org/project/stc/">PyPI</a>. By default, the library uses an in-memory SQLite database, shipped with Python standard library, that require no configuration by the user. However, it is possible to configure STC to run on alternative DBMS in order to take advantage of persistent storage and scalability.</p>
+<p>Sparse Tensor Classifier (STC) is a supervised classification algorithm for categorical data inspired by the notion of superposition of states in quantum physics. It supports multiclass and multilabel classification, online learning, prior knowledge, automatic dataset balancing, missing data, and provides a native explanation of its predictions both for single instances and for each target class label globally.</p>
+<p>The algorithm is implemented in SQL and made available via the Python module <code class="docutils literal notranslate"><span class="pre">stc</span></code> on <a class="reference external" href="https://pypi.org/project/stc/">PyPI</a>. By default, the library uses an in-memory SQLite database, shipped with Python standard library, that require no configuration by the user. However, it is possible to configure STC to run on alternative DBMS in order to take advantage of persistent storage and scalability.</p>
 <p><a class="reference external" href="https://github.com/SparseTensorClassifier/stc">&gt; Don’t forget to star the repository!</a></p>
 <section id="quickstart">
 <h2>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this headline">¶</a></h2>
@@ -179,15 +174,15 @@
 <section id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <p>Use the Sparse Tensor Classifier to classify animals.
-The <a class="reference external" href="https://www.kaggle.com/uciml/zoo-animal-classification">dataset</a> consists of 101 animals from a zoo.
+The <a class="reference external" href="https://archive.ics.uci.edu/ml/datasets/Zoo">dataset</a> consists of 101 animals from a zoo.
 There are 16 variables with various traits to describe the animals.
-The 7 Class Types are: Mammal, Bird, Reptile, Fish, Amphibian, Bug and Invertebrate
+The 7 Class Types are: Mammal, Bird, Reptile, Fish, Amphibian, Bug and Invertebrate.
 The purpose for this dataset is to be able to predict the classification of the animals.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">stc</span> <span class="kn">import</span> <span class="n">SparseTensorClassifier</span>
 
 <span class="c1"># Read the dataset</span>
-<span class="n">zoo</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/SparseTensorClassifier/tutorial/main/data/zoo/zoo.csv&#39;</span><span class="p">)</span>
+<span class="n">zoo</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://git.io/Jss6f&#39;</span><span class="p">)</span>
 <span class="c1"># Initialize the class</span>
 <span class="n">STC</span> <span class="o">=</span> <span class="n">SparseTensorClassifier</span><span class="p">(</span><span class="n">targets</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;class_type&#39;</span><span class="p">],</span> <span class="n">features</span><span class="o">=</span><span class="n">zoo</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 <span class="c1"># Fit the training data</span>
@@ -203,7 +198,7 @@ The purpose for this dataset is to be able to predict the classification of the 
 </section>
 <section id="tutorials">
 <h2>Tutorials<a class="headerlink" href="#tutorials" title="Permalink to this headline">¶</a></h2>
-<p>Get started with more advanced <a class="reference external" href="tutorials.html">tutorials</a>.</p>
+<p>Get started with more advanced <a class="reference external" href="https://github.com/SparseTensorClassifier/tutorial">tutorials</a>.</p>
 </section>
 <section id="bug-reports">
 <h2>Bug Reports<a class="headerlink" href="#bug-reports" title="Permalink to this headline">¶</a></h2>
