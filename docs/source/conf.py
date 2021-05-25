@@ -57,14 +57,11 @@ templates_path = ['_templates']
 exclude_patterns = []
 
 # Google Analytics
-googleanalytics_id = 'UA-000'
+googleanalytics_id = 'UA-197829786-1'
 
 # Open Graph
 ogp_site_url = 'https://sparsetensorclassifier.org'
 ogp_image = 'https://sparsetensorclassifier.org/_static/img/logo.png'
-ogp_custom_meta_tags = [
-    '<meta property="og:description" content="An Explainable Probabilistic Classifier for Categorical Data Inspired to Quantum Physics" />',
-]
 
 # Sitemap
 html_baseurl = 'https://sparsetensorclassifier.org'
@@ -79,6 +76,7 @@ html_extra_path = ['robots.txt']
 html_theme = 'press'
 html_logo = 'logo.png'
 html_favicon = 'favicon.png'
+html_sidebars = {'**': ['util/sidetoc.html']}
 html_theme_options = {
   "external_links": [
       ("Github", "https://github.com/SparseTensorClassifier")
