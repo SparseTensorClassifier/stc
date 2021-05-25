@@ -55,7 +55,7 @@ class SparseTensorClassifier:
                      with :meth:`stc.SparseTensorClassifier.learn`
     :param engine: Connection to database in the form of a
                    `SQLAlchemy engine <https://docs.sqlalchemy.org/en/13/core/engines.html>`_.
-                   By default, STC uses an in-memory SQLite database. The list of supported DBMS is provided above.
+                   By default, STC uses an in-memory SQLite database.
     :param prefix: Prefix to use in the database tables. STC instances initialized with different prefix are completely
                    independent. This makes possible to use the same ``engine`` multiple times with different ``prefix``,
                    without creating a new database/schema. If an instance associated with the same ``engine`` and
