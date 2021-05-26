@@ -59,7 +59,8 @@ googleanalytics_id = 'UA-197829786-1'
 # Open Graph
 ogp_site_url = 'https://sparsetensorclassifier.org'
 ogp_custom_meta_tags = [
-    '<meta property="og:image" content="https://sparsetensorclassifier.org/_static/img/logo-1280x640.png" />',
+	'<meta name="twitter:card" content="summary_large_image" />',
+	'<meta property="og:image" content="https://sparsetensorclassifier.org/_static/img/logo-1280x640.png" />',
 	'<meta property="og:image" content="https://sparsetensorclassifier.org/_static/img/logo-512x512.png" />',
 ]
 
