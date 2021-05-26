@@ -1,9 +1,6 @@
 Sparse Tensor Classifier
 ====================================================
 
-.. meta::
-   :description: An Explainable Probabilistic Classifier for Categorical Data Inspired to Quantum Physics
-
 .. toctree::
 	:hidden:
 	:maxdepth: 1
