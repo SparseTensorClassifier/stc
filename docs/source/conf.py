@@ -29,9 +29,6 @@ project = 'Sparse Tensor Classifier'
 copyright = '2020, E Guidotti, A Ferrara'
 author = 'E Guidotti, A Ferrara'
 
-# The full version, including alpha/beta/rc tags
-release = '0.1.0'
-
 
 # -- General configuration ---------------------------------------------------
 
@@ -61,7 +58,10 @@ googleanalytics_id = 'UA-197829786-1'
 
 # Open Graph
 ogp_site_url = 'https://sparsetensorclassifier.org'
-ogp_image = 'https://sparsetensorclassifier.org/_static/img/logo.png'
+ogp_custom_meta_tags = [
+    '<meta property="og:image" content="https://sparsetensorclassifier.org/_static/img/logo-1280x640.png" />',
+	'<meta property="og:image" content="https://sparsetensorclassifier.org/_static/img/logo-512x512.png" />',
+]
 
 # Sitemap
 html_baseurl = 'https://sparsetensorclassifier.org'
@@ -74,8 +74,8 @@ html_extra_path = ['robots.txt']
 # a list of builtin themes.
 #
 html_theme = 'press'
-html_logo = 'logo.png'
 html_favicon = 'favicon.png'
+html_logo = '_static/img/logo.svg'
 html_sidebars = {'**': ['util/sidetoc.html']}
 html_theme_options = {
   "external_links": [
