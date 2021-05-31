@@ -70,7 +70,7 @@ Open an issue on `GitHub <https://github.com/SparseTensorClassifier/stc/issues>`
 Cite as
 ====================================================
 
-Guidotti E., Ferrara A., (2021). "*An Explainable Probabilistic Classifier for Categorical Data Inspired to Quantum Physics*"
+Guidotti E., Ferrara A., (2021). "*An Explainable Probabilistic Classifier for Categorical Data Inspired to Quantum Physics*" `arXiv:2105.13988 <https://arxiv.org/abs/2105.13988>`_
 
 `See references <references.html>`_
 
