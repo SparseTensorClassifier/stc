@@ -10,9 +10,9 @@ Sparse Tensor Classifier
 	references
 	contacts
 	
-Sparse Tensor Classifier (STC) is a supervised classification algorithm for categorical data inspired by the notion of superposition of states in quantum physics. It supports multiclass and multilabel classification, online learning, prior knowledge, automatic dataset balancing, missing data, and provides a native explanation of its predictions both for single instances and for each target class label globally. 
+Sparse Tensor Classifier (STC) is a supervised classification algorithm for categorical data inspired by the notion of superposition of states in quantum physics. It supports multiclass and multilabel classification, online learning, prior knowledge, automatic dataset balancing, missing data, and provides a native explanation of its predictions both for single instances and for each target class label globally. Read more at https://arxiv.org/pdf/2105.13988.pdf
 
-The algorithm is implemented in SQL and made available via the Python module ``stc`` on `PyPI <https://pypi.org/project/stc/>`_. By default, the library uses an in-memory SQLite database, shipped with Python standard library, that require no configuration by the user. However, it is possible to configure STC to run on `alternative DBMS <https://github.com/SparseTensorClassifier/tutorial/blob/main/Quickstart_DBMS.ipynb>`_ in order to take advantage of persistent storage and scalability.
+The algorithm is implemented in SQL and made available via the Python module ``stc`` on `PyPI <https://pypi.org/project/stc/>`_. By default, the library uses an in-memory SQLite database, shipped with Python standard library, that require no configuration by the user. It is also possible to configure STC to run on `alternative DBMS <https://github.com/SparseTensorClassifier/tutorial/blob/main/Quickstart_DBMS.ipynb>`_ in order to take advantage of persistent storage and scalability.
 	
 ====================================================
 Quickstart
@@ -25,14 +25,12 @@ Install ``stc`` from `PyPI <https://pypi.org/project/stc/>`_. We recommend using
 	pip install stc
 	
 ====================================================
-Example
+Usage
 ====================================================
 
-Use the Sparse Tensor Classifier to classify animals.
-The `dataset <https://archive.ics.uci.edu/ml/datasets/Zoo>`_ consists of 101 animals from a zoo.
-There are 16 variables with various traits to describe the animals.
-The 7 Class Types are: Mammal, Bird, Reptile, Fish, Amphibian, Bug and Invertebrate.
-The purpose for this dataset is to be able to predict the classification of the animals.
+Initialize, fit, and predict. Get started in 3 lines on code! 
+
+**Example**: use Sparse Tensor Classifier to classify animals. The `dataset <https://archive.ics.uci.edu/ml/datasets/Zoo>`_ consists of 101 animals from a zoo. There are 16 variables with various traits to describe the animals. The 7 Class Types are: ``Mammal``, ``Bird``, ``Reptile``, ``Fish``, ``Amphibian``, ``Bug`` and ``Invertebrate``. The purpose for this dataset is to be able to predict the classification of the animals. STC returns a tuple with (1) the predicted classes, (2) the probability for each class, and (3) the contribution of each feature to the target class labels (explainability).
 
 .. code-block:: python
 	
@@ -58,7 +56,7 @@ Discover the flexibility of the library in the `documentation <docs.html>`_.
 Tutorials
 ====================================================
 
-Get started with more advanced `tutorials <https://github.com/SparseTensorClassifier/tutorial>`_.
+Get started with `step-by-step tutorials and use-cases <https://github.com/SparseTensorClassifier/tutorial>`_.
 
 ====================================================
 Bug Reports
@@ -70,7 +68,7 @@ Open an issue on `GitHub <https://github.com/SparseTensorClassifier/stc/issues>`
 Cite as
 ====================================================
 
-Guidotti E., Ferrara A., (2021). "*An Explainable Probabilistic Classifier for Categorical Data Inspired to Quantum Physics*" `arXiv:2105.13988 <https://arxiv.org/abs/2105.13988>`_
+*Guidotti E., Ferrara A., (2021). "An Explainable Probabilistic Classifier for Categorical Data Inspired to Quantum Physics"* `arXiv:2105.13988 <https://arxiv.org/abs/2105.13988>`_
 
 `See references <references.html>`_
 
