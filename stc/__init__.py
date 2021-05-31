@@ -20,12 +20,10 @@ from typing import Union, Any, List, Tuple, FrozenSet
 class SparseTensorClassifier:
     """
     This class implements the Sparse Tensor Classifier (STC), a supervised classification algorithm for categorical
-    data inspired by the notion of superposition of states in quantum physics. It supports multiclass and multilabel
-    classification, online learning, prior knowledge, automatic dataset balancing, missing data, and provides a native
-    explanation of its predictions both for single instances and for each target class label globally.
+    data inspired by the notion of superposition of states in quantum physics.
 
     The algorithm is implemented in SQL. By default, the library uses an in-memory SQLite database, shipped with
-    Python standard library, that require no configuration by the user. However, it is possible to configure STC to
+    Python standard library, that require no configuration by the user. It is also possible to configure STC to
     run on `alternative DBMS <https://github.com/SparseTensorClassifier/tutorial/blob/main/Quickstart_DBMS.ipynb>`_
     in order to take advantage of persistent storage and scalability.
 
