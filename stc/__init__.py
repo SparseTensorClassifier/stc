@@ -161,15 +161,11 @@ class SparseTensorClassifier:
                 raise Exception("Dimensions found in DB different from the dimensions provided")
 
         # init values map from DB or from scratch
-        self.values_map = {}
         try:
             x = self.read_sql(f"SELECT * FROM {self.value_table}")
-            for d in x[self.dim_field].unique():
-                v = x[x[self.dim_field] == d]
-                self.values_map[d] = self._defaultdict(zip(v[self.name_field], v[self.value_field]))
+            self.values_map = self._defaultdict(zip(x[self.name_field], x[self.value_field]))
         except SQLAlchemyError:
-            for d in self.dims_map.values():
-                self.values_map[d] = self._defaultdict()
+            self.values_map = self._defaultdict()
 
         # encrypt
         self.dims = self._encrypt(self.dims)
@@ -331,9 +327,6 @@ class SparseTensorClassifier:
             items = items_all[c:c + self.chunksize]
             uids = uids_all[c:c + self.chunksize]
 
-            # tmp dictionary
-            values_map = self.values_map.copy()
-
             # add key:value pairs to the dictionary
             new = []
             for i, item in enumerate(items):
@@ -345,12 +338,11 @@ class SparseTensorClassifier:
 
                 for dim, values in dv:
                     try:
-                        k = self.dims_map[dim]
                         for v in set(values):
-                            n = len(values_map[k])
-                            m = values_map[k].setdefault(v, n)
+                            n = len(self.values_map)
+                            m = self.values_map.setdefault(v, n)
                             if n == m:
-                                new.append({self.dim_field: k, self.name_field: v, self.value_field: m})
+                                new.append({self.name_field: v, self.value_field: m})
                     except KeyError:
                         pass
 
@@ -358,7 +350,6 @@ class SparseTensorClassifier:
             if new:
                 x = pd.DataFrame(new)
                 self.to_sql(x, self.value_table, if_exists="append")
-                self.values_map = values_map
 
             # transform
             self._transform(items=items, uids=uids, dims=self.dims,
@@ -793,7 +784,7 @@ class SparseTensorClassifier:
         for d in x.columns:
             if d in self.dims_map:
                 i = self.dims_map[d]
-                y['d' + str(i)] = x[d].map(self.values_map[i])
+                y['d' + str(i)] = x[d].map(self.values_map)
             else:
                 y[d] = x[d]
 
@@ -807,15 +798,13 @@ class SparseTensorClassifier:
         if isinstance(x, list):
             return [dinv[d] for d in x]
 
-        vinv = {}
-        for d, m in self.values_map.items():
-            vinv['d' + str(d)] = {v: k for k, v in m.items()}
+        vinv = {v: k for k, v in self.values_map.items()}
 
         y = pd.DataFrame()
         for i in x.columns:
             if i in dinv:
                 d = dinv[i]
-                y[d] = x[i].map(vinv[i])
+                y[d] = x[i].map(vinv)
             else:
                 y[i] = x[i]
 
@@ -1167,7 +1156,7 @@ class SparseTensorClassifier:
                             m = 0
                             k = self.dims_map[dim]
                             for v, n in Counter(value_list).most_common():
-                                v = self.values_map[k][v]
+                                v = self.values_map[v]
                                 if v == -1:
                                     m += n
                                 else:
