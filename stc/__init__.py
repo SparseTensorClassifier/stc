@@ -75,13 +75,15 @@ class SparseTensorClassifier:
                  or ``log`` for cross-entropy (log-loss).
     :param tol: The actual predicted probabilities are replaced with the value of ``tol`` when using ``loss='log'`` and
                 the actual predicted probability is zero.
+    :param verbose: Print on progress? Default ``True``.
     """
 
     def __init__(self, targets: List[str], features: List[str] = None, collapse: bool = True,
                  engine: Union[Engine, str] = "sqlite://", prefix: str = "stc",
                  chunksize: int = 100, cache: bool = True,
                  power: float = 0.5, balance: float = 1, entropy: float = 1,
-                 loss: str = 'norm', tol: float = 1e-15) -> None:
+                 loss: str = 'norm', tol: float = 1e-15,
+                 verbose: bool = True) -> None:
 
         # validate
         if not targets:
@@ -179,6 +181,7 @@ class SparseTensorClassifier:
         self.entropy = entropy
         self.loss = loss
         self.tol = tol
+        self.verbose = verbose
         self.qtable = {}
         self.set({})
 
@@ -360,7 +363,8 @@ class SparseTensorClassifier:
             if_exists = "append"
 
             # update progressbar
-            progress.update(c + self.chunksize)
+            if self.verbose:
+                progress.update(c + self.chunksize)
 
     def explain(self, features: List[str] = None) -> pd.DataFrame:
         """
@@ -492,7 +496,8 @@ class SparseTensorClassifier:
             self._DROP(tmp_test)
 
             # update progressbar
-            progress.update(c + self.chunksize)
+            if self.verbose:
+                progress.update(c + self.chunksize)
 
         # back to original dims and values
         t = self._decrypt(self.targets)
@@ -648,7 +653,8 @@ class SparseTensorClassifier:
                         self.qtable[key] = val
 
                     # update progressbar
-                    progress.step()
+                    if self.verbose:
+                        progress.step()
 
                     # check runtime
                     toc = time()
