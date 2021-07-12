@@ -1092,8 +1092,8 @@ class SparseTensorClassifier:
 
         # create table and insert
         except SQLAlchemyError:
-            self.conn.execute(self._CREATE_meta(table=self.meta_table))
             if value is not None:
+                self.conn.execute(self._CREATE_meta(table=self.meta_table))
                 self.conn.execute(text(self._UPDATE_meta(key=key)), value=value)
 
         # fallback
