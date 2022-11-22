@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="UTF-8") as file:
 
 setup(
     name='stc',
-    version='0.3.1',
+    version='0.3.2',
     packages=['stc'],
     python_requires='>=3',
     install_requires=['numpy', 'pandas', 'sqlalchemy'],
